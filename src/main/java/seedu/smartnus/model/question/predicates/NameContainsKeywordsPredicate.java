@@ -30,7 +30,7 @@ public class NameContainsKeywordsPredicate implements Predicate<Question> {
             return false;
         }
         return keywords.stream()
-                .allMatch(keyword -> question.getName().fullName.toLowerCase().contains(keyword));
+                .allMatch(keyword -> StringUtil.containsIgnoreCaseString(question.getName().fullName, keyword));
     }
 
     @Override

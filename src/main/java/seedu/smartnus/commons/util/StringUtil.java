@@ -39,6 +39,27 @@ public class StringUtil {
     }
 
     /**
+     * Returns true if the {@code sentence} contains the {@code word} substring, ignoring case.
+     * A full match is not needed as the {@code sentence} could contain the word connected to punctuation marks
+     * (e.g. "keyword,").
+     *
+     * @param sentence A non-null string.
+     * @param word A non-null, non-empty string that should be a single word.
+     * @return True if the sentence string contains the word, ignoring case.
+     */
+    public static boolean containsIgnoreCaseString(String sentence, String word) {
+        requireNonNull(sentence);
+        requireNonNull(word);
+
+        String preppedWord = word.trim().toLowerCase();
+        checkArgument(!preppedWord.isEmpty(), "Word parameter cannot be empty");
+        checkArgument(preppedWord.split("\\s+").length == 1, "Word parameter should be a single word");
+        String preppedSentence = sentence.toLowerCase();
+
+        return preppedSentence.contains(preppedWord);
+    }
+
+    /**
      * Returns a detailed message of the t, including the stack trace.
      */
     public static String getDetails(Throwable t) {
