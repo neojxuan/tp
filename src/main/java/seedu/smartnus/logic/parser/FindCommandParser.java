@@ -78,7 +78,7 @@ public class FindCommandParser implements Parser<FindCommand> {
     private void setNamePredicate(ArgumentMultimap argMultimap, ArrayList<Predicate<Question>> predicates) {
         String nameInput = argMultimap.getPreamble();
         if (!nameInput.isBlank()) {
-            List<String> parsedNameKeywords = Stream.of(nameInput.trim().split("([,.?!:;*()\"-\\[\\]]|\\s)+"))
+            List<String> parsedNameKeywords = Stream.of(nameInput.trim().toLowerCase().split("\\s+"))
                     .filter(keyword -> !keyword.isEmpty()).collect(Collectors.toList());
             predicates.add(new NameContainsKeywordsPredicate(parsedNameKeywords));
         }

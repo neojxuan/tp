@@ -54,9 +54,9 @@ sessions more effective and faster than traditional GUI apps.
   e.g `qn/QUESTION [t/TAG]` can be used as `qn/What is 1+1? t/math` or as `qn/What is 1+1?`.
 
 * Items with `…`​ after them can be used multiple times.<br>
-  e.g. `/opt…​` can be used as `opt/ OPTION1`, `opt/ OPTION1 opt/ OPTION2` etc.
+  e.g. `opt/…​` can be used as `opt/ OPTION1`, `opt/ OPTION1 opt/ OPTION2` etc.
 
-* Parameters can be in any order.<br>
+* Parameters can be in any order unless otherwise specified.<br>
   e.g. if the command specifies `ans/ ANSWER opt/ OPTION1`, `opt/ OPTION1 ans/ ANSWER` is also acceptable.
 
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
@@ -187,14 +187,17 @@ run the `list question` command.
 
 ### Find/Search Questions: `find`
 
-Shows a list of all questions in SmartNUS that have all the specified keywords,
+Shows a list of all questions in SmartNUS that contain all the specified keywords,
 at least one of the specified tags, and the importance value (if specified).
 
 Format: `find [KEYWORDS]... [t/TAG]... [i/IMPORTANCE]`
 
 * At least one of the optional fields to find by must be specified.
+* If present, the ```KEYWORDS``` parameter must be specified before tags and importance.
 * The search is case-insensitive for both keywords and tags (e.g. `math` will match `MaTH`).
-* Only full words will be matched for both keywords and tags (e.g. `CS2100` will not match `CS210`).
+* Only full words will be matched for tags (e.g. `CS2100` will not match `CS210`).
+* For keywords, substrings will be matched (e.g. running `find Harry name`
+will match a question titled `What is Harry's full name?`) 
 * Any question that has at least one of the tags **AND** and all the keywords in its title (in any order)
 **AND** the importance specified will be listed.
 
@@ -210,8 +213,10 @@ To return to the list of all questions, use the `list question` command.
 
 Examples:
 * `find load word t/CS2100 t/MIPS` returns questions tagged with at least one of the tags and that whose title
-includes "load" and "word" in any order.
+contains "load" and "word" in any order.
   * e.g. A question titled "What is the load word instruction used for?" tagged with only CS2100 will be listed.
+* `find algo Dijkstra` returns questions that contain "algo" and "dijkstra" in their titles.
+  * e.g. A question titled "What is the runtime of Dijkstra's Algorithm in big O notation?" will be listed.
 
 <!-- TODO: standardise format, remove params from header, add brief description-->
 ### Find/Search Stats: `stat [t/TAG]...`
