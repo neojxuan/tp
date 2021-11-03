@@ -196,8 +196,7 @@ Format: `find [KEYWORDS]... [t/TAG]... [i/IMPORTANCE]`
 * If present, the ```KEYWORDS``` parameter must be specified before tags and importance.
 * The search is case-insensitive for both keywords and tags (e.g. `math` will match `MaTH`).
 * Only full words will be matched for tags (e.g. `find t/CS210` will not match a question tagged with `CS2100`).
-* For keywords, partial words will be matched (e.g. `find Shakespeare`
-will match a question titled `What is Shakespeare's first name?`).
+* For keywords, partial words will be matched (e.g. `find CS210` will match a question titled `CS2100`).
 * Any question that has at least one of the tags **AND** all the keywords in its title (in any order)
 **AND** the importance specified will be listed.
 
@@ -213,10 +212,11 @@ To return to the list of all questions, use the `list question` command.
 
 Examples:
 * `find load word t/CS2100 t/MIPS` returns questions tagged with at least one of the tags and whose title
-contains "load" and "word" in any order.
-  * e.g. A question titled "What is the load word instruction used for?" tagged with only CS2100 will be listed.
+contains both "load" and "word" in any order.
+  * A question titled "What is the load word instruction used for?" tagged with only CS2100 will be listed.
+  * A question titled "How many bytes are in a word?" tagged with  both CS2100 and MIPS will **not** be listed as it does not contain "word".
 * `find algo Dijkstra` returns questions that contain "algo" and "dijkstra" in their titles.
-  * e.g. A question titled "What is the runtime of Dijkstra's Algorithm in big O notation?" will be listed.
+  * A question titled "What is the runtime of Dijkstra's Algorithm in big O notation?" will be listed.
 
 <!-- TODO: standardise format, remove params from header, add brief description-->
 ### Find/Search Stats: `stat [t/TAG]...`
